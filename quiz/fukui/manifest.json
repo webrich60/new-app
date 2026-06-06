@@ -1,8 +1,9 @@
 {
-  "name": "福井県民ショー",
+  "name": "福井県民クイズショー",
   "short_name": "福井県民ショー",
   "description": "福井の激ムズご当地クイズアプリ",
-  "start_url": "./index.html",
+  "start_url": "/quiz/fukui/index.html",
+  "scope": "/quiz/fukui/",
   "display": "standalone",
   "background_color": "#f8fafc",
   "theme_color": "#1e293b",

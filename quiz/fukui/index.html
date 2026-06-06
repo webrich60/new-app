@@ -4,24 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
-    <!-- SEO最適化 -->
     <title>福井県民ショー - ご当地愛テスト</title>
     <meta name="description" content="福井のグルメ、観光、歴史、方言、イベント・祭りに関する激ムズご当地クイズアプリ。真の県民テストに挑戦して、あなたの「地元愛」を証明しよう！">
     <meta name="keywords" content="福井県民ショー,クイズ,激ムズ,ご当地,観光,歴史,方言,テスト,暇つぶし">
     <meta name="author" content="福井県民ショー">
-    <!-- Googleにインデックス（検索登録）を許可する本番用設定 -->
     <meta name="robots" content="index, follow">
 
-    <!-- OGP設定（SNSでの拡散・SEO強化用） -->
+    <link rel="manifest" href="./manifest.json">
+    <link rel="apple-touch-icon" href="./icon-192x192.png">
+    <meta name="theme-color" content="#1e293b">
+
     <meta property="og:type" content="website">
     <meta property="og:title" content="福井県民ショー - 激ムズご当地愛テスト">
     <meta property="og:description" content="福井の魅力が詰まった激ムズクイズに挑戦！全国のプレイヤーと地元愛を競い合おう。">
-    <meta property="og:url" content="https://webrich60.github.io/あなたのリポジトリ名/">
+    <meta property="og:url" content="https://webrich.info/quiz/fukui/">
     <meta property="og:site_name" content="福井県民ショー">
     <meta property="og:image" content="https://placehold.co/1200x630/1e293b/ffffff?text=Fukui+Quiz"> 
     <meta name="twitter:card" content="summary_large_image">
 
-    <!-- 構造化データ -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -38,7 +38,6 @@
     }
     </script>
 
-    <!-- Tailwind CSS (CDN) -->
     <script src="https://cdn.tailwindcss.com"></script>
 
     <style>
@@ -102,7 +101,6 @@
 </head>
 <body class="h-[100dvh] bg-slate-50 text-slate-800 flex flex-col font-sans relative overflow-hidden">
 
-    <!-- ソースコード保護・不正操作防止用スクリプト -->
     <script>
         document.addEventListener('contextmenu', e => e.preventDefault());
         document.addEventListener('keydown', e => {
@@ -112,10 +110,8 @@
         });
     </script>
 
-    <!-- ◯❌アニメーション表示用オーバーレイ -->
     <div id="mark-overlay" class="fixed inset-0 z-50 pointer-events-none hidden items-center justify-center bg-white/30 backdrop-blur-sm"></div>
 
-    <!-- 演出用レイヤー（JSで表示切替） -->
     <div id="effect-layer" class="fixed inset-0 pointer-events-none z-30 overflow-hidden">
         <div class="absolute bottom-[70px] md:bottom-[90px] -left-4 text-[6rem] md:text-[10rem] animate-left-pop drop-shadow-xl origin-bottom-left">
             <div class="relative inline-block">
@@ -130,24 +126,18 @@
         </div>
     </div>
 
-    <!-- 広告枠（上部）: JSで動的に表示 -->
     <div id="ad-top-wrapper" class="w-full bg-white border-b border-slate-200 py-2 px-4 flex justify-center shadow-sm z-40 shrink-0 hidden">
         <div id="ad-top-container" class="w-full max-w-3xl flex justify-center items-center">
-            <!-- 広告がここに入る -->
-        </div>
+            </div>
     </div>
 
-    <!-- アプリメインコンテンツ描画エリア -->
     <main id="app-root" class="flex-1 flex flex-col w-full z-10 relative overflow-y-auto"></main>
 
-    <!-- 広告枠（下部）: JSで動的に表示 -->
     <div id="ad-bottom-wrapper" class="w-full bg-white border-t border-slate-200 py-2 px-4 flex justify-center shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] z-40 shrink-0 mt-auto hidden">
         <div id="ad-bottom-container" class="w-full max-w-3xl flex justify-center items-center">
-            <!-- 広告がここに入る -->
-        </div>
+            </div>
     </div>
 
-    <!-- 🔐 管理者パスワード入力モーダル -->
     <div id="admin-auth-modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4">
         <div class="bg-white rounded-3xl p-8 max-w-sm w-full shadow-[8px_8px_0_0_#1e293b] border-4 border-slate-800 animate-fade-in text-center relative">
             <button onclick="document.getElementById('admin-auth-modal').classList.replace('flex', 'hidden')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-800 transition-colors">
@@ -164,21 +154,18 @@
         </div>
     </div>
 
-    <!-- 🚀 カミングスーンモーダル（汎用） -->
     <div id="coming-soon-modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4 opacity-0 transition-opacity duration-300">
         <div class="bg-white rounded-3xl p-8 max-w-sm w-full shadow-[8px_8px_0_0_#1e293b] border-4 border-slate-800 text-center relative transform scale-90 transition-transform duration-300">
             <div class="text-6xl mb-4 animate-bounce">🚀</div>
             <h3 id="coming-soon-title" class="text-2xl font-black text-blue-600 mb-4 tracking-wide">只今準備中です！</h3>
             <p id="coming-soon-text" class="text-slate-700 font-bold leading-relaxed mb-6">
-                <!-- Javascriptから文言を注入します -->
-            </p>
+                </p>
             <button onclick="window.closeComingSoonModal()" class="w-full py-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-black border-2 border-slate-800 shadow-[4px_4px_0_0_#1e293b] active:translate-y-[4px] active:translate-x-[4px] active:shadow-none transition-all text-lg">
                 楽しみに待つ！
             </button>
         </div>
     </div>
 
-    <!-- アプリケーションロジック -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js";
         import { getFirestore, collection, getDocs, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js";
@@ -1472,7 +1459,6 @@
             appRoot.innerHTML = html;
         }
 
-        // 🌟 追加：ユーザー向け「法的文書」画面のレンダリング
         function renderLegal() {
             window.scrollTo(0, 0);
             
@@ -1518,7 +1504,6 @@
             appRoot.innerHTML = html;
         }
 
-        // 🌟 変更：タブ切り替えを取り入れた管理者画面
         window.renderAdmin = function(activeTab = 'ads') {
             window.scrollTo(0, 0);
             
@@ -1528,7 +1513,6 @@
             const currentMainSiteUrl = localStorage.getItem('fukui_quiz_main_site_url') || '';
             const currentLineStampUrl = localStorage.getItem('fukui_quiz_line_stamp_url') || '';
 
-            // タブのHTML
             const tabHtml = `
                 <div class="flex flex-wrap gap-2 mb-8 border-b-2 border-slate-200 pb-2">
                     <button onclick="window.renderAdmin('ads')" class="px-3 py-2 rounded-t-lg transition-colors text-sm ${activeTab === 'ads' ? 'admin-tab-active bg-slate-50' : 'admin-tab-inactive hover:bg-slate-50'}">① 広告・システム</button>
@@ -1542,7 +1526,6 @@
 
             if (activeTab === 'ads') {
                 contentHtml = `
-                        <!-- GAS URL設定 -->
                         <div class="space-y-6 mb-10">
                             <div>
                                 <label class="block text-sm font-black text-slate-800 mb-2 border-l-4 border-purple-500 pl-2">GASウェブアプリURL（お問い合わせ用）</label>
@@ -1550,7 +1533,6 @@
                             </div>
                         </div>
 
-                        <!-- ポータルサイトURL -->
                         <div class="space-y-6 mb-10">
                             <div>
                                 <label class="block text-sm font-black text-slate-800 mb-2 border-l-4 border-emerald-500 pl-2">メインポータルサイトのURL（北陸版ボタンのリンク先）</label>
@@ -1558,7 +1540,6 @@
                             </div>
                         </div>
 
-                        <!-- 広告設定 -->
                         <h3 class="text-xl font-black text-slate-800 mb-4 border-l-4 border-blue-500 pl-3">アプリ共通 広告設定</h3>
                         <div class="bg-yellow-50 border-2 border-yellow-400 p-4 rounded-xl mb-6 shadow-sm">
                             <h3 class="font-black text-yellow-900 text-sm mb-2 flex items-center gap-1">⚠️ アフィリエイトタグに関する注意</h3>
@@ -1580,7 +1561,6 @@
                             </div>
                         </div>
 
-                        <!-- リンク集専用 広告設定セクション -->
                         <h3 class="text-xl font-black text-slate-800 mt-10 mb-4 border-l-4 border-pink-500 pl-3">リンク集ページ専用 広告設定</h3>
                         <div class="space-y-6 mb-10">
                             <div>
@@ -1897,9 +1877,10 @@
         // ==========================================
         fetchQuizData();
         
+        // 🌟 追加：PWA（アプリ化）機能の有効化。独自ドメインでも機能するようにスコープを明示的に指定。
         if ('serviceWorker' in navigator && window.location.protocol.startsWith('http')) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./sw.js')
+                navigator.serviceWorker.register('./sw.js', { scope: '/quiz/fukui/' })
                     .then(registration => {
                         console.log('✅ ServiceWorker登録成功（PWAインストール準備完了）');
                     })
