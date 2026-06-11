@@ -4,11 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
-    <!-- SEO最適化 -->
-    <title>福井県民クイズショー - ご当地愛テスト</title>
-    <meta name="description" content="福井のグルメ、観光、歴史、方言、イベントに関する激ムズご当地クイズアプリ。真の県民テストに挑戦して, あなたの「地元愛」を証明しよう！">
-    <meta name="keywords" content="福井県民クイズショー,クイズ,激ムズ,ご当地,観光,歴史,方言,テスト,暇つぶし">
+    <!-- 🌟 SEO・OGPの静的最適化（クローラー・SNSシェア対策） -->
+    <title>福井県民クイズショー - 激ムズご当地愛テスト</title>
+    <meta name="description" content="福井のグルメ、観光、歴史、方言、イベントに関する激ムズご当地クイズアプリ。真の県民テストに挑戦して、あなたの「地元愛」を証明しよう！">
+    <meta name="keywords" content="福井県民クイズショー,クイズ,激ムズ,ご当地,観光,歴史,方言,テスト,暇つぶし,福井県">
     
+    <!-- OGPタグ (SNSでのシェア時にリッチなカードを表示) -->
+    <meta property="og:title" content="福井県民クイズショー - 激ムズご当地愛テスト">
+    <meta property="og:description" content="福井のグルメ、観光、方言など、地元民しか解けない激ムズクイズに挑戦！">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://webrich.info/quiz/fukui/">
+    <meta property="og:image" content="https://webrich.info/quiz/fukui/icon-512x512.png">
+    <meta property="og:site_name" content="福井県民クイズショー">
+    <meta name="twitter:card" content="summary">
+
     <!-- PWA（アプリ・インストール）化のための設定 -->
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#1e293b">
@@ -45,30 +54,29 @@
             animation: markPop 1s ease-out forwards;
         }
 
-        /* ご当地キャラひょっこりアニメーション */
+        /* 🌟 キャラクターアニメーション（手前に飛び出す演出） */
         @keyframes rightPop {
             0%, 40%, 100% { transform: translate(100%, 100%) rotate(20deg); }
-            10% { transform: translate(-10%, -40%) rotate(-10deg); } 
-            20% { transform: translate(-10%, -30%) rotate(-5deg); }  
-            30% { transform: translate(-10%, -40%) rotate(-10deg); }
+            10% { transform: translate(-15%, -30%) rotate(-10deg); } 
+            20% { transform: translate(-15%, -20%) rotate(-5deg); }  
+            30% { transform: translate(-15%, -30%) rotate(-10deg); }
         }
         .animate-right-pop {
-            animation: rightPop 7s ease-in-out infinite;
+            animation: rightPop 8s ease-in-out infinite;
         }
 
         @keyframes leftPop {
             0%, 40%, 100% { transform: translate(-100%, 100%) rotate(-20deg); }
-            10% { transform: translate(10%, -40%) rotate(10deg); } 
-            20% { transform: translate(10%, -30%) rotate(5deg); }
-            30% { transform: translate(10%, -40%) rotate(10deg); }
+            10% { transform: translate(15%, -30%) rotate(10deg); } 
+            20% { transform: translate(15%, -20%) rotate(5deg); }
+            30% { transform: translate(15%, -30%) rotate(10deg); }
         }
         .animate-left-pop {
-            animation: leftPop 9s ease-in-out infinite;
+            animation: leftPop 10s ease-in-out infinite;
         }
 
         * { -webkit-tap-highlight-color: transparent; }
         
-        /* タブのスタイル */
         .admin-tab-active { border-bottom: 4px solid #3b82f6; color: #1e3a8a; font-weight: 900; }
         .admin-tab-inactive { border-bottom: 4px solid transparent; color: #64748b; font-weight: 700; }
     </style>
@@ -88,40 +96,46 @@
     <!-- ◯❌アニメーション表示用オーバーレイ -->
     <div id="mark-overlay" class="fixed inset-0 z-50 pointer-events-none hidden items-center justify-center bg-white/30 backdrop-blur-sm"></div>
 
-    <!-- 演出用レイヤー -->
+    <!-- 🌟 演出用レイヤー（手前に飛び出す設定、サイズを小さく調整） -->
     <div id="effect-layer" class="fixed inset-0 pointer-events-none z-30 overflow-hidden">
-        <div class="absolute bottom-[70px] md:bottom-[90px] -left-4 text-[6rem] md:text-[10rem] animate-left-pop drop-shadow-xl origin-bottom-left">
+        <div class="absolute bottom-[20px] md:bottom-[40px] -left-2 text-[3.5rem] md:text-[5.5rem] animate-left-pop drop-shadow-xl origin-bottom-left">
             <div class="relative inline-block">
                 🦀
                 <div class="absolute top-[35%] right-[2%] bg-yellow-400 text-slate-800 text-[0.12em] font-black px-[0.3em] py-[0.2em] border-[0.02em] border-yellow-600 rounded-[0.1em] shadow-sm rotate-[15deg] leading-none whitespace-nowrap tracking-tighter">ご当地</div>
             </div>
         </div>
-        <div class="absolute bottom-[70px] md:bottom-[90px] -right-4 text-[6rem] md:text-[10rem] animate-right-pop drop-shadow-xl origin-bottom-right">
+        <div class="absolute bottom-[20px] md:bottom-[40px] -right-2 text-[3.5rem] md:text-[5.5rem] animate-right-pop drop-shadow-xl origin-bottom-right">
             🦖
         </div>
     </div>
 
-    <!-- 広告枠（上部） -->
-    <div id="ad-top-wrapper" class="w-full bg-white border-b border-slate-200 py-1 px-4 flex flex-col justify-center items-center shadow-sm z-40 shrink-0 hidden">
-        <span class="text-[10px] text-slate-400 font-bold border border-slate-300 px-1 rounded-sm mb-1 leading-none">PR</span>
+    <!-- 広告枠（上部）ステマ規制対応 -->
+    <div id="ad-top-wrapper" class="w-full bg-white border-b border-slate-200 py-2 px-4 flex flex-col justify-center items-center shadow-sm z-40 shrink-0 hidden">
+        <span class="text-[9px] text-slate-500 bg-slate-100 font-bold border border-slate-300 px-2 py-0.5 rounded-sm mb-1 leading-none">スポンサーリンク / PR</span>
         <div id="ad-top-container" class="w-full max-w-3xl flex justify-center items-center">
         </div>
     </div>
 
-    <!-- アプリメインコンテンツ描画エリア -->
-    <main id="app-root" class="flex-1 flex flex-col w-full z-10 relative overflow-y-auto"></main>
+    <!-- アプリメインコンテンツ描画エリア (初期状態にSEO用テキストを配置) -->
+    <main id="app-root" class="flex-1 flex flex-col w-full z-10 relative overflow-y-auto">
+        <!-- JSが実行される前、クローラー向けに読み込ませる静的コンテンツ -->
+        <div class="p-6 text-center opacity-0 absolute pointer-events-none">
+            <h1>福井県民クイズショー</h1>
+            <p>福井のグルメ、観光、歴史、方言、イベントに関する激ムズご当地クイズアプリです。越前がに、恐竜博物館、ソースカツ丼など、地元愛を試す問題が満載！全国ランキング対応。</p>
+        </div>
+    </main>
 
-    <!-- 広告枠（下部） -->
-    <div id="ad-bottom-wrapper" class="w-full bg-white border-t border-slate-200 py-1 px-4 flex flex-col justify-center items-center shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] z-40 shrink-0 mt-auto hidden">
-        <span class="text-[10px] text-slate-400 font-bold border border-slate-300 px-1 rounded-sm mb-1 leading-none mt-1">PR</span>
+    <!-- 広告枠（下部）ステマ規制対応 -->
+    <div id="ad-bottom-wrapper" class="w-full bg-white border-t border-slate-200 py-2 px-4 flex flex-col justify-center items-center shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] z-40 shrink-0 mt-auto hidden">
+        <span class="text-[9px] text-slate-500 bg-slate-100 font-bold border border-slate-300 px-2 py-0.5 rounded-sm mb-1 leading-none mt-1">スポンサーリンク / PR</span>
         <div id="ad-bottom-container" class="w-full max-w-3xl flex justify-center items-center">
         </div>
     </div>
 
     <!-- 🔐 管理者パスワード入力モーダル -->
-    <div id="admin-auth-modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4">
+    <div id="admin-auth-modal" style="display: none;" class="fixed inset-0 z-[100] items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4">
         <div class="bg-white rounded-3xl p-8 max-w-sm w-full shadow-[8px_8px_0_0_#1e293b] border-4 border-slate-800 animate-fade-in text-center relative">
-            <button onclick="document.getElementById('admin-auth-modal').classList.replace('flex', 'hidden')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-800 transition-colors">
+            <button onclick="document.getElementById('admin-auth-modal').style.display='none'" class="absolute top-4 right-4 text-slate-400 hover:text-slate-800 transition-colors">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
             <div class="text-4xl mb-4">⚙️</div>
@@ -136,7 +150,7 @@
     </div>
 
     <!-- 🚀 カミングスーンモーダル（汎用） -->
-    <div id="coming-soon-modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4 opacity-0 transition-opacity duration-300">
+    <div id="coming-soon-modal" style="display: none;" class="fixed inset-0 z-[100] items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4 opacity-0 transition-opacity duration-300">
         <div class="bg-white rounded-3xl p-8 max-w-sm w-full shadow-[8px_8px_0_0_#1e293b] border-4 border-slate-800 text-center relative transform scale-90 transition-transform duration-300">
             <div class="text-6xl mb-4 animate-bounce">🚀</div>
             <h3 id="coming-soon-title" class="text-2xl font-black text-blue-600 mb-4 tracking-wide">只今準備中です！</h3>
@@ -326,7 +340,7 @@
             { name: '伝統工芸・ものづくり', icon: 'Palette', color: 'text-indigo-500', desc: '匠の技と文化' },
             { name: '方言', icon: 'MessageCircle', color: 'text-pink-500', desc: 'ディープな地元弁' },
             { name: 'イベント・祭り', icon: 'Calendar', color: 'text-purple-500', desc: '熱いお祭り騒ぎ' },
-            { name: '自然・地理', icon: 'Leaf', color: 'text-green-600', desc: '海・山・湖の逆景' }
+            { name: '自然・地理', icon: 'Leaf', color: 'text-green-600', desc: '海・山・湖の絶景' }
         ];
 
         let usedQuestionIds = new Set();
@@ -385,7 +399,7 @@
                     localStorage.setItem('fukui_quiz_gas_url', data.gasUrl || '');
                     localStorage.setItem('fukui_quiz_main_site_url', data.mainSiteUrl || '');
                     localStorage.setItem('fukui_quiz_line_stamp_url', data.lineStampUrl || ''); 
-                    localStorage.setItem('fukui_quiz_line_stamp_img_url', data.lineStampImgUrl || ''); // 🌟 追加
+                    localStorage.setItem('fukui_quiz_line_stamp_img_url', data.lineStampImgUrl || ''); 
                     if(data.customLinks) {
                         customLinks = data.customLinks;
                         localStorage.setItem('fukui_quiz_custom_links', JSON.stringify(customLinks));
@@ -411,7 +425,7 @@
                     gasUrl: localStorage.getItem('fukui_quiz_gas_url') || '',
                     mainSiteUrl: localStorage.getItem('fukui_quiz_main_site_url') || '',
                     lineStampUrl: localStorage.getItem('fukui_quiz_line_stamp_url') || '', 
-                    lineStampImgUrl: localStorage.getItem('fukui_quiz_line_stamp_img_url') || '', // 🌟 追加
+                    lineStampImgUrl: localStorage.getItem('fukui_quiz_line_stamp_img_url') || '', 
                     customLinks: customLinks,
                     legalDocs: legalDocs,
                     updatedAt: new Date().toISOString()
@@ -559,15 +573,14 @@
                 document.getElementById('admin-pass-input').value = '';
                 document.getElementById('admin-auth-error').innerText = '';
                 const modal = document.getElementById('admin-auth-modal');
-                modal.classList.remove('hidden');
-                modal.classList.add('flex');
+                modal.style.display = 'flex';
             }
         }
 
         window.checkAdminPass = function() {
             const pass = document.getElementById('admin-pass-input').value;
             if (pass === 'fukui2026') { 
-                document.getElementById('admin-auth-modal').classList.replace('flex', 'hidden');
+                document.getElementById('admin-auth-modal').style.display = 'none';
                 renderAdmin();
             } else {
                 document.getElementById('admin-auth-error').innerText = 'パスワードが違います';
@@ -685,6 +698,23 @@
             window.setMode('home');
         }
 
+        function saveScoreRecord() {
+            if (!currentUser.nickname) return;
+            const pointsToAdd = score * 10;
+            const newRecord = {
+                date: new Date().toISOString(),
+                mode: quizConfig.title,
+                score: score,
+                total: quizConfig.count,
+                percentage: Math.round((score / quizConfig.count) * 100),
+                points: pointsToAdd 
+            };
+            
+            localScores.push(newRecord);
+            localStorage.setItem('fukui_quiz_scores', JSON.stringify(localScores));
+            saveScoreToFirestore(pointsToAdd);
+        }
+
         window.saveSettings = async function() {
             const btn = document.getElementById('admin-save-btn');
             const originalText = btn.innerHTML;
@@ -698,7 +728,7 @@
             const gasUrl = document.getElementById('gas-url-input').value.trim();
             const mainSiteUrl = document.getElementById('main-site-url-input').value.trim();
             const lineStampUrl = document.getElementById('line-stamp-url-input').value.trim(); 
-            const lineStampImgUrl = document.getElementById('line-stamp-img-url-input').value.trim(); // 🌟 追加
+            const lineStampImgUrl = document.getElementById('line-stamp-img-url-input').value.trim(); 
             
             localStorage.setItem('fukui_quiz_ad_top', topAd);
             localStorage.setItem('fukui_quiz_ad_bottom', bottomAd);
@@ -707,7 +737,7 @@
             localStorage.setItem('fukui_quiz_gas_url', gasUrl);
             localStorage.setItem('fukui_quiz_main_site_url', mainSiteUrl);
             localStorage.setItem('fukui_quiz_line_stamp_url', lineStampUrl); 
-            localStorage.setItem('fukui_quiz_line_stamp_img_url', lineStampImgUrl); // 🌟 追加
+            localStorage.setItem('fukui_quiz_line_stamp_img_url', lineStampImgUrl); 
             
             await syncSettingsToCloud();
             loadAds();
@@ -824,7 +854,6 @@
             }
         };
 
-        // 🌟 追加：ポータルサイトへのリンク機能（モーダル対応）
         window.goToMainSite = function() {
             const url = localStorage.getItem('fukui_quiz_main_site_url');
             if (url && url.trim() !== '') {
@@ -834,8 +863,7 @@
                 document.getElementById('coming-soon-title').innerText = '只今準備中です！';
                 document.getElementById('coming-soon-text').innerHTML = '現在、さらにスケールアップした<br><span class="text-indigo-600 text-lg">「全国ご当地ポータルサイト」</span><br>を絶賛制作中です！✨<br><br>皆さまに楽しんでいただけるコンテンツを仕込んでいますので、完成をぜひ楽しみにお待ちください！';
                 
-                modal.classList.remove('hidden');
-                modal.classList.add('flex');
+                modal.style.display = 'flex';
                 setTimeout(() => {
                     modal.classList.remove('opacity-0');
                     modal.querySelector('div').classList.remove('scale-90');
@@ -844,7 +872,6 @@
             }
         };
 
-        // 🌟 追加：LINEスタンプ販売ページへのリンク機能（モーダル対応）
         window.goToLineStamp = function() {
             const url = localStorage.getItem('fukui_quiz_line_stamp_url');
             if (url && url.trim() !== '') {
@@ -854,8 +881,7 @@
                 document.getElementById('coming-soon-title').innerText = 'LINEスタンプ作成中！';
                 document.getElementById('coming-soon-text').innerHTML = '現在、ご当地愛あふれる<br><span class="text-[#06C755] text-lg">「専用LINEスタンプ」</span><br>を絶賛制作中です！✨<br><br>完成をぜひ楽しみにお待ちください！';
                 
-                modal.classList.remove('hidden');
-                modal.classList.add('flex');
+                modal.style.display = 'flex';
                 setTimeout(() => {
                     modal.classList.remove('opacity-0');
                     modal.querySelector('div').classList.remove('scale-90');
@@ -864,15 +890,13 @@
             }
         };
 
-        // カミングスーンモーダルを閉じる
         window.closeComingSoonModal = function() {
             const modal = document.getElementById('coming-soon-modal');
             modal.classList.add('opacity-0');
             modal.querySelector('div').classList.remove('scale-100');
             modal.querySelector('div').classList.add('scale-90');
             setTimeout(() => {
-                modal.classList.add('hidden');
-                modal.classList.remove('flex');
+                modal.style.display = 'none';
             }, 300);
         };
 
@@ -912,15 +936,16 @@
                             <span class="text-blue-600 text-3xl md:text-5xl">クイズショー</span>
                         </h1>
                         <p class="text-slate-600 text-lg md:text-xl font-bold mt-4 mb-8">
-                            えっ, こんなの知ってるの…？<br class="md:hidden" />あなたの『地元愛』が今、試される！
+                            えっ、こんなの知ってるの…？<br class="md:hidden" />あなたの『地元愛』が今、試される！
                         </p>
 
+                        <!-- PWAインストールボタン -->
                         <div id="install-button-container" class="${(deferredPrompt || isIOS || isLine) && !isStandalone ? 'flex' : 'hidden'} justify-center mb-8 relative z-20">
-                            <button onclick="window.handleInstallClick()" class="bg-white border-2 border-emerald-500 hover:bg-emerald-50 text-emerald-800 font-black py-2 px-4 rounded-xl shadow-[2px_2px_0_0_#10b981] flex items-center gap-2 animate-bounce transition-all active:translate-y-[2px] active:translate-x-[2px] active:shadow-none w-max mx-auto">
-                                <img src="./icon-192x192.png" alt="アプリアイコン" class="w-8 h-8 rounded-lg shadow-sm border border-slate-200">
+                            <button onclick="window.handleInstallClick()" class="bg-gradient-to-r from-emerald-500 to-teal-400 hover:from-emerald-400 hover:to-teal-300 text-white font-black py-3 px-5 rounded-2xl shadow-[0_6px_0_0_#064e3b,0_10px_15px_-3px_rgba(0,0,0,0.3)] flex items-center gap-3 animate-pulse transition-all active:translate-y-[6px] active:shadow-[0_0px_0_0_#064e3b,0_0px_0px_0px_rgba(0,0,0,0)] w-max mx-auto border-2 border-emerald-700">
+                                <img src="./icon-192x192.png" alt="アプリアイコン" class="w-10 h-10 rounded-xl shadow-inner bg-white p-0.5 border-2 border-emerald-200">
                                 <div class="text-left">
-                                    <div class="text-[9px] text-emerald-600 font-bold mb-0.5 leading-none">無料アプリ版をゲット</div>
-                                    <div class="text-xs md:text-sm tracking-wide leading-tight">PC・スマホに追加する</div>
+                                    <div class="text-[10px] text-emerald-100 font-bold mb-0.5 leading-none tracking-widest uppercase">\\ いつでも遊べる！ /</div>
+                                    <div class="text-sm md:text-base tracking-wide leading-tight drop-shadow-md">アプリをスマホに追加する</div>
                                 </div>
                             </button>
                         </div>
@@ -956,7 +981,8 @@
                     </div>
                     
                     <div class="mt-8 relative z-20">
-                         <button onclick="window.setMode('ranking')" class="w-full max-w-sm mx-auto p-4 rounded-xl bg-slate-800 text-white border-2 border-slate-800 shadow-[4px_4px_0_0_#0f172a] active:translate-y-[4px] active:translate-x-[4px] active:shadow-none transition-all duration-100 flex items-center justify-center gap-2 font-black text-lg">
+                         <!-- 🌟 変更：全国ランキングボタンを「濃い青」に修正 -->
+                         <button onclick="window.setMode('ranking')" class="w-full max-w-sm mx-auto p-4 rounded-xl bg-blue-900 text-white border-2 border-blue-900 shadow-[4px_4px_0_0_#1e3a8a] active:translate-y-[4px] active:translate-x-[4px] active:shadow-none hover:bg-blue-800 transition-all duration-100 flex items-center justify-center gap-2 font-black text-lg">
                             <div class="w-6 h-6 text-yellow-400">${ICONS.Award}</div>
                             全国ランキングを見る
                         </button>
@@ -969,7 +995,7 @@
                         </button>
                         <p class="text-xs text-slate-400 font-bold mt-2 mb-8">現在の出題済み問題数: ${usedQuestionIds.size} / ${QUIZ_DATA.length}</p>
                         
-                        <!-- ポータルサイトへのリンクボタン（🌟 全国 -> 北陸へ修正！） -->
+                        <!-- ポータルサイトへのリンクボタン -->
                         <div class="mb-6 flex justify-center">
                             <button onclick="window.goToMainSite()" class="flex items-center justify-center gap-2 px-6 py-4 bg-indigo-50 border-2 border-indigo-500 rounded-xl shadow-[4px_4px_0_0_#4f46e5] active:translate-y-[4px] active:translate-x-[4px] active:shadow-none font-black text-indigo-900 text-base md:text-lg transition-all w-full max-w-sm">
                                 <div class="w-6 h-6 text-indigo-600">${ICONS.Home}</div> 北陸ご当地クイズはこちら
@@ -980,7 +1006,6 @@
                         <div class="mb-6 flex justify-center">
                             <button onclick="window.goToLineStamp()" class="w-full max-w-sm relative overflow-hidden bg-[#06C755] hover:bg-[#05b34c] border-2 border-slate-800 rounded-2xl shadow-[4px_4px_0_0_#1e293b] active:translate-y-[4px] active:translate-x-[4px] active:shadow-none transition-all group text-left">
                                 <div class="flex items-center p-3 gap-3 relative z-10">
-                                    <!-- 🦕 管理画面から設定可能なスタンプ画像枠（未設定時は🦖がバウンス！） -->
                                     <div class="w-16 h-16 shrink-0 bg-white rounded-xl border-2 border-slate-800 flex items-center justify-center relative shadow-inner overflow-hidden text-4xl select-none">
                                         ${(() => {
                                             const imgUrl = localStorage.getItem('fukui_quiz_line_stamp_img_url') || '';
@@ -997,7 +1022,7 @@
                                             <svg class="w-4 h-4 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M24 10.304c0-5.369-5.383-9.738-12-9.738-6.616 0-12 4.369-12 9.738 0 4.814 4.269 8.846 10.036 9.608.391.084.922.258 1.057.592.122.303.079.778.039 1.085l-.171 1.027c-.053.303-.242 1.186 1.039.647 1.281-.54 6.911-4.069 9.428-6.967 1.739-1.907 2.572-3.843 2.572-5.992z"/></svg>
                                             <span class="text-[10px] font-black text-[#06C755] bg-white px-2 py-0.5 rounded-full shadow-sm">絶賛販売中！</span>
                                         </div>
-                                        <h3 class="text-yellow-300 font-black text-sm md:text-base leading-tight drop-shadow-[0_1.5px_1.5px_rgba(0,0,0,0.8)]">
+                                        <h3 class="text-white font-black text-sm md:text-base leading-tight drop-shadow-[0_2px_2px_rgba(0,0,0,0.6)]">
                                             日常で使える！<br>福井弁LINEスタンプ
                                         </h3>
                                     </div>
@@ -1006,7 +1031,6 @@
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
                                     </div>
                                 </div>
-                                <!-- キラキラエフェクト -->
                                 <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
                                     <div class="absolute -top-10 -left-10 w-10 h-40 bg-white opacity-20 rotate-45 transform translate-x-[-150%] group-hover:translate-x-[600%] transition-transform duration-700 ease-in-out"></div>
                                 </div>
@@ -1236,7 +1260,7 @@
                 message = 'なかなかやりますね！でもご当地の奥深さはまだまだこんなもんじゃありませんよ。';
             } else {
                 rank = 'Cランク：エセ県民！？';
-                message = 'あれれ…？地元のこと, もっと知ってほしいな。ぜひもう一度チャレンジを！';
+                message = 'あれれ…？地元のこと、もっと知ってほしいな。ぜひもう一度チャレンジを！';
             }
 
             let html = `
@@ -1602,7 +1626,7 @@
             appRoot.innerHTML = html;
         }
 
-        // 🌟 変更：タブ切り替えを取り入れた管理者画面（4タブ構成に進化！）
+        // 🌟 変更：タブ切り替えを取り入れた管理者画面
         window.renderAdmin = function(activeTab = 'ads') {
             window.scrollTo(0, 0);
             
@@ -1611,9 +1635,8 @@
             const currentGasUrl = localStorage.getItem('fukui_quiz_gas_url') || '';
             const currentMainSiteUrl = localStorage.getItem('fukui_quiz_main_site_url') || '';
             const currentLineStampUrl = localStorage.getItem('fukui_quiz_line_stamp_url') || ''; 
-            const currentLineStampImgUrl = localStorage.getItem('fukui_quiz_line_stamp_img_url') || ''; // 🌟 追加
+            const currentLineStampImgUrl = localStorage.getItem('fukui_quiz_line_stamp_img_url') || ''; 
 
-            // タブのHTML（LINEスタンプ設定タブを新設）
             const tabHtml = `
                 <div class="flex flex-wrap gap-2 mb-8 border-b-2 border-slate-200 pb-2">
                     <button onclick="renderAdmin('ads')" class="px-4 py-2 rounded-t-lg transition-colors text-sm md:text-base ${activeTab === 'ads' ? 'admin-tab-active bg-slate-50' : 'admin-tab-inactive hover:bg-slate-50'}">① 広告・システム</button>
@@ -1625,7 +1648,6 @@
 
             let contentHtml = '';
 
-            // タブ①：広告・システム設定
             if (activeTab === 'ads') {
                 contentHtml = `
                         <h3 class="text-xl font-black text-slate-800 mb-4 border-l-4 border-purple-500 pl-3">お問い合わせシステム（GAS）設定</h3>
@@ -1689,7 +1711,6 @@
                             </div>
                         </div>
 
-                        <!-- 他のタブの入力値を隠しフィールドで保持 -->
                         <input type="hidden" id="line-stamp-url-input" value="${currentLineStampUrl}">
                         <input type="hidden" id="line-stamp-img-url-input" value="${currentLineStampImgUrl}">
 
@@ -1702,7 +1723,6 @@
                 `;
             }
 
-            // タブ②：LINEスタンプ設定 (画像URLも設定可能に進化！🦕)
             else if (activeTab === 'line') {
                 contentHtml = `
                         <h3 class="text-xl font-black text-slate-800 mb-4 border-l-4 border-[#06C755] pl-3">LINEスタンプ設定</h3>
@@ -1714,7 +1734,6 @@
                                 <input type="text" id="line-stamp-url-input" class="w-full px-4 py-3 rounded-xl border-2 border-slate-800 bg-white focus:outline-none focus:ring-4 focus:ring-[#06C755]/30 font-bold text-sm transition-all placeholder:text-slate-400" value="${currentLineStampUrl}" placeholder="https://store.line.me/stickershop/product/...">
                             </div>
 
-                            <!-- 🌟 新設：画像URL入力フォーム -->
                             <div>
                                 <label class="block text-sm font-black text-slate-800 mb-2">② LINEスタンプ画像のURL (または画像パス)</label>
                                 <input type="text" id="line-stamp-img-url-input" class="w-full px-4 py-3 rounded-xl border-2 border-slate-800 bg-white focus:outline-none focus:ring-4 focus:ring-[#06C755]/30 font-bold text-sm transition-all placeholder:text-slate-400" value="${currentLineStampImgUrl}" placeholder="例: https://webrich.info/quiz/fukui/stamp.png または ./stamp.png">
@@ -1722,7 +1741,6 @@
                             </div>
                         </div>
 
-                        <!-- 他のタブの入力値を隠しフィールドで保持 -->
                         <input type="hidden" id="gas-url-input" value="${currentGasUrl}">
                         <textarea id="top-ad-input" class="hidden">${currentTopAd}</textarea>
                         <textarea id="bottom-ad-input" class="hidden">${currentBottomAd}</textarea>
@@ -1739,7 +1757,6 @@
                 `;
             }
 
-            // タブ③：リンク集管理
             else if (activeTab === 'links') {
                 contentHtml = `
                         <h3 class="text-xl font-black text-slate-800 mb-4 border-l-4 border-emerald-500 pl-3">ご当地リンク集の管理</h3>
@@ -1783,7 +1800,6 @@
                 `;
             }
 
-            // タブ④：法的文書設定
             else if (activeTab === 'legal') {
                 contentHtml = `
                         <h3 class="text-xl font-black text-slate-800 mb-4 border-l-4 border-orange-500 pl-3">法的文書（規約等）設定</h3>
@@ -1810,7 +1826,6 @@
                                 <textarea id="legal-disclaimer-input" rows="3" class="w-full px-4 py-3 rounded-xl border-2 border-slate-800 bg-slate-50 focus:bg-white focus:outline-none focus:ring-4 focus:ring-blue-100 font-medium text-sm transition-all resize-y">${legalDocs.disclaimer}</textarea>
                             </div>
 
-                            <!-- 他のタブの入力値を隠しフィールドで保持 -->
                             <input type="hidden" id="gas-url-input" value="${currentGasUrl}">
                             <textarea id="top-ad-input" class="hidden">${currentTopAd}</textarea>
                             <textarea id="bottom-ad-input" class="hidden">${currentBottomAd}</textarea>
