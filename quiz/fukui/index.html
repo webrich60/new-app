@@ -879,7 +879,7 @@
             } else {
                 const modal = document.getElementById('coming-soon-modal');
                 document.getElementById('coming-soon-title').innerText = 'LINEスタンプ作成中！';
-                document.getElementById('coming-soon-text').innerHTML = '現在、ご当地愛あふれる<br><span class="text-[#06C755] text-lg">「専用LINEスタンプ」</span><br>を絶賛制作中です！✨<br><br>完成をぜひ楽しみにお待ちください！';
+                document.getElementById('coming-soon-text').innerHTML = '現在、ご当地愛あふれる<br><span class="text-[#06C755] text-lg">「福井弁の恐竜ほやほや君の<br>ラインスタンプ」</span><br>を絶賛制作中です！✨<br><br>完成をぜひ楽しみにお待ちください！';
                 
                 modal.style.display = 'flex';
                 setTimeout(() => {
@@ -1022,8 +1022,8 @@
                                             <svg class="w-4 h-4 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M24 10.304c0-5.369-5.383-9.738-12-9.738-6.616 0-12 4.369-12 9.738 0 4.814 4.269 8.846 10.036 9.608.391.084.922.258 1.057.592.122.303.079.778.039 1.085l-.171 1.027c-.053.303-.242 1.186 1.039.647 1.281-.54 6.911-4.069 9.428-6.967 1.739-1.907 2.572-3.843 2.572-5.992z"/></svg>
                                             <span class="text-[10px] font-black text-[#06C755] bg-white px-2 py-0.5 rounded-full shadow-sm">絶賛販売中！</span>
                                         </div>
-                                        <h3 class="text-white font-black text-sm md:text-base leading-tight drop-shadow-[0_2px_2px_rgba(0,0,0,0.6)]">
-                                            日常で使える！<br>福井弁LINEスタンプ
+                                        <h3 class="text-white font-black text-sm leading-tight drop-shadow-[0_2px_2px_rgba(0,0,0,0.6)]">
+                                            日常で使える！<br>福井弁の恐竜ほやほや君の<br>ラインスタンプ
                                         </h3>
                                     </div>
                                     
@@ -1249,18 +1249,23 @@
             
             let rank = '';
             let message = '';
+            let stampCatchphrase = '';
             if (percentage === 100) {
                 rank = quizConfig.type === 'hard' ? 'SSランク：ご当地の創造神' : 'Sランク：真の県民（神レベル）';
                 message = quizConfig.type === 'hard' ? '全10問正解の偉業！あなたはその県そのものです！' : '完璧です！あなたは間違いなく生粋の地元民、あるいはご当地を愛しすぎている変態（褒め言葉）です！';
+                stampCatchphrase = 'あなたの福井愛、もはや神やざ！✨';
             } else if (percentage >= 80) {
                 rank = 'Aランク：ご当地マニア';
                 message = '素晴らしい知識量！地元の魅力について一晩中語り合えそうですね。';
+                stampCatchphrase = 'あなたの福井愛、なかなかやざ！😆';
             } else if (percentage >= 50) {
                 rank = 'Bランク：ご当地好き';
                 message = 'なかなかやりますね！でもご当地の奥深さはまだまだこんなもんじゃありませんよ。';
+                stampCatchphrase = 'あなたの福井愛、まあまあやざ！😊';
             } else {
                 rank = 'Cランク：エセ県民！？';
                 message = 'あれれ…？地元のこと、もっと知ってほしいな。ぜひもう一度チャレンジを！';
+                stampCatchphrase = '福井愛、これから育ててこっさ！🌱';
             }
 
             let html = `
@@ -1307,6 +1312,17 @@
                                     ホームに戻る
                                 </button>
                             </div>
+                            
+                            <!-- 🌟 LINEスタンプ誘導テキスト（成績で変化） -->
+                            <div class="mt-8 text-center bg-slate-50 p-4 rounded-2xl border-2 border-slate-200 shadow-sm max-w-sm mx-auto">
+                                <p class="text-sm font-black text-slate-800 mb-1">${stampCatchphrase}</p>
+                                <p class="text-[10px] font-bold text-slate-500 mb-3">福井弁をLINEでも使いたい方へ</p>
+                                <button onclick="window.goToLineStamp()" class="text-xs font-black text-[#06C755] hover:text-[#05b34c] underline decoration-2 underline-offset-2 flex items-center justify-center gap-1 mx-auto transition-colors">
+                                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M24 10.304c0-5.369-5.383-9.738-12-9.738-6.616 0-12 4.369-12 9.738 0 4.814 4.269 8.846 10.036 9.608.391.084.922.258 1.057.592.122.303.079.778.039 1.085l-.171 1.027c-.053.303-.242 1.186 1.039.647 1.281-.54 6.911-4.069 9.428-6.967 1.739-1.907 2.572-3.843 2.572-5.992z"/></svg>
+                                    福井弁の恐竜ほやほや君のラインスタンプを見る
+                                </button>
+                            </div>
+                            
                         </div>
                     </div>`;
 
@@ -1334,6 +1350,16 @@
                 
                 html += `
                         </div>
+                        
+                        <!-- 🌟 復習の最後にもスタンプ誘導を追加 -->
+                        <div class="mt-8 text-center bg-slate-50 p-4 rounded-2xl border-2 border-slate-200 shadow-sm max-w-sm mx-auto">
+                            <p class="text-[10px] font-bold text-slate-500 mb-3">福井弁をLINEでも使いたい方へ</p>
+                            <button onclick="window.goToLineStamp()" class="text-xs font-black text-[#06C755] hover:text-[#05b34c] underline decoration-2 underline-offset-2 flex items-center justify-center gap-1 mx-auto transition-colors">
+                                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M24 10.304c0-5.369-5.383-9.738-12-9.738-6.616 0-12 4.369-12 9.738 0 4.814 4.269 8.846 10.036 9.608.391.084.922.258 1.057.592.122.303.079.778.039 1.085l-.171 1.027c-.053.303-.242 1.186 1.039.647 1.281-.54 6.911-4.069 9.428-6.967 1.739-1.907 2.572-3.843 2.572-5.992z"/></svg>
+                                福井弁の恐竜ほやほや君のラインスタンプを見る
+                            </button>
+                        </div>
+
                     </div>`;
             }
 
